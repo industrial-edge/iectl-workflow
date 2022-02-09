@@ -8,6 +8,7 @@ Industrial Edge Control (IECTL) is a command line tool that enables you to inter
     - [General task](#general-task)
   - [Requirements](#requirements)
     - [Prerequisites](#prerequisites)
+    - [Used Components](#used-components)
   - [Installation](#installation)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
@@ -24,7 +25,7 @@ This application example shows how to install and use IECTL in a complete workfl
   3. Deploy Edge applications
 
 ### General task
-The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is  to provide with several shell scripts which can be executed from a device which has connection to the Industrial Edge componments you want to interact with. This application example follows the network structure dispayed in the picture below.
+The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is  to provide with several shell scripts which can be executed from a device which has connection to the Industrial Edge componments you want to interact with. This application example follows the network structure dispayed in the picture below. The workflow starts with activating IEM in IE HUB, continuios with automatic onboarding of one Edge Device and finally custom application is upldaded and deployed to the onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications.
 
 <img src="./docs/graphics/network-setup.PNG"/>
 
@@ -32,7 +33,22 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 
 ### Prerequisites
 
+- All Components are connected to a network with DHCP server available
+- All componets have a IP adress
+- IEM has connection to IE HUB
+- Linux Device with Docker installed
+
+### Used Components
+
+- Industrial Edge HUB
+- Industrial Edge Managment App v1.4.11
+- Industrial Edge Managment OS v1.4.0-42-amd64
+- Industrial Edge Device v1.3.0-57
+- Ubuntu 20.04
+
 ## Installation
+
+The installation steps can be found [here](docs/installation.md)
 
 ## Documentation
 
