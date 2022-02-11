@@ -26,6 +26,26 @@
 
 ## Activate IEM
 
+> **Note** To finish this task, you need to have IE HUB API access granted. This means you need to have API key from IE HUB.
+
+1. Setup the virtual machine with IEM and connect to your network. Make sure the IEM has access to internet. By end of this step the IEM should be accessible from the Linux device to the point, where the activation file is needed. 
+  
+  <img src="./graphics/before-activation.PNG"/>
+
+2. Go to your Linux environment and open the script for activating IEM. This script can be found [here](./../src/activate_IEM/activate-iem.sh)
+
+3. Adjust the configuration parameters based on your setup.
+
+  <img src="./graphics/activate-iem-config.PNG"/>
+
+4. Open up terminal and run this command to start the activation script.
+
+  ```bash
+  sh activate-iem.sh
+  ```
+
+5. After this step, the IEM instance is created in IE HUB and the activation as well as clustyer creation is started automatically. Wait untill the cluster creation process is completed.
+
 ## Onboard Edge device
 
 ## Deploy custom application
