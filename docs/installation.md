@@ -4,8 +4,9 @@
 - [Provisioning of Industrial Edge components using IECTL](#provisioning-of-industrial-edge-components-using-iectl)
   - [Prerequisites](#prerequisites)
     - [Install Industrial Edge Control](#install-industrial-edge-control)
+    - [Clone repository and prepare the environment](#clone-repository-and-prepare-the-environment)
   - [Activate IEM](#activate-iem)
-  - [Onboard Edge device](#onboard-edge-device)
+  - [Onboard Edge device(s)](#onboard-edge-devices)
   - [Deploy custom application](#deploy-custom-application)
 
 
@@ -24,11 +25,43 @@
     sudo install ./iectl /usr/bin/
     ```
 
+### Clone repository and prepare the environment
+
+1. Clone this repository to your linux device where teh IECTL is installed. 
+2. Go to the [src](../src) folder and prepare a file structure like this (in case some folders are missing, create them): 
+
+    ```txt
+    src/
+    │   activate-iem.sh
+    │   create-ied.sh
+    │   activate-ied.sh          
+    │   standalone-app.sh
+    │
+    └───workspace/
+    │
+    └───onboarding-file/
+    │
+    └───app/
+    │   │   docker-compose.prod.yml
+    │   │   docker-compose.yml
+    │   └───web/
+    │       │   Dockerfile
+    │       └───html/
+    │
+    └───appicon/
+    │   │   icon.png
+    │
+    └───script/
+    │   │   getAppId.py
+    │   │   getAppVersion.py
+    │   │   getDeviceId.py
+    ```
+
 ## Activate IEM
 
 > **Note** To finish this task, you need to have IE HUB API access granted. This means you need to have API key from IE HUB.
 
-1. Setup the virtual machine with IEM and connect to your network. Make sure the IEM has access to internet. By end of this step the IEM should be accessible from the Linux device to the point, where the activation file is needed. 
+1. Setup the virtual machine with IEM and connect to your network. Make sure the IEM has access to internet. By end of this step the IEM should be accessible from the Linux device to the point, where the activation file is needed.
   
   <img src="./graphics/before-activation.PNG"/>
 
@@ -46,6 +79,21 @@
 
 5. After this step, the IEM instance is created in IE HUB and the activation as well as clustyer creation is started automatically. Wait untill the cluster creation process is completed.
 
-## Onboard Edge device
+## Onboard Edge device(s)
+
+1. Setup your Edge device(s) in such way, that it is connected to ypour network and has access to IEM. The IED(s) should be accessible from the linux device to the point, where the configuration file is needed.
+
+  <img src="./graphics/before-onboarding.PNG"/>
+
+2. Open the [create-ied.sh](../src/create-ied.sh) and [activate-ied.sh](../src/activate-ied.sh) scripts and adjust the configuration and environmental variables in the beginning of the script.
+
+  <img src="./graphics/device-config.PNG"/>
+
+3. Run the following commands to create IED instance in IEM and then onboard the device. 
+  
+  ```bash
+  sh create-ied.sh
+  sh activate-ied.sh
+  ```
 
 ## Deploy custom application
