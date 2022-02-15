@@ -1,21 +1,21 @@
 # IEM configuration variables 
-export IEM_USER="pavel.halama@siemens.com"
-export IEM_PASSWORD="Edge4SUP!"
-export IEM_URL="https://192.168.2.50:9443"
+export IEM_USER="<iem-username>"
+export IEM_PASSWORD="<iem-password>"
+export IEM_URL="https://<iem-ip>:9443"
 
 # Device Configuration variables 
-export DEVICE_NAME="deci"
+export DEVICE_NAME="<device-name>"
 
 # Application configuration variables
-export APP_NAME="myapp"
-export APP_REPO="myrepo"
+export APP_NAME="<application-name>"
+export APP_REPO="<application-repository>"
 
 # IECTL environmental variables
 export IE_SKIP_CERTIFICATE=true
 export EDGE_SKIP_TLS=1
 
 # Project envirinmental variables 
-export PROJECT_PATH_PREFIX=/home/siemens/iectl-demo
+export PROJECT_PATH_PREFIX="<project-path-prefix>"
 
 
 echo "---------------------------Creating publisher configuration---------------------------"

@@ -97,3 +97,21 @@
   ```
 
 ## Deploy custom application
+
+1. Open terminal, navigate to the [app](../src/app) forder and build the docker application using this command 
+
+  ```bash
+  docker-compose build
+  ```
+
+2. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
+
+  <img src="./graphics/before-standalone-app.PNG"/>
+
+3. In order to create a standalone application, uplaod to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
+
+  ```bash
+  sh standalone-app.sh
+  ```
+
+4. By the end of this step, the application should get deployed to the edge device.
