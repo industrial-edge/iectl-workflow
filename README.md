@@ -18,14 +18,14 @@ Industrial Edge Control (IECTL) is a command line tool that enables you to inter
 
 ### Overview
 
-This application example shows how to install and use IECTL in a complete workflow to automatically setup Edge Platform in 3 steps:
+This application example shows how to install and use IECTL in a complete workflow to automatically setup Edge components in 3 steps:
 
   1. Activate IEM
   2. Onboard Edge device
   3. Deploy Edge applications
 
 ### General task
-The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is  to provide with several shell scripts which can be executed from a device which has connection to the Industrial Edge componments you want to interact with. This application example follows the network structure dispayed in the picture below. The workflow starts with activating IEM in IE HUB, continuios with automatic onboarding of one Edge Device and finally custom application is upldaded and deployed to the onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications.
+The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is  to provide with several shell scripts which can be executed from a device which has connection to the Industrial Edge componments you want to interact with. This application example follows the network structure dispayed in the picture below. The workflow starts with activating IEM in IE HUB, continues with automatic onboarding of one Edge Device and finally custom application is uploaded and deployed to the onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications.
 
 <img src="./docs/graphics/network-setup.PNG"/>
 
@@ -36,7 +36,7 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 - All Components are connected to a network with DHCP server available
 - All componets have a IP adress
 - IEM has connection to IE HUB
-- Linux Device with Docker installed
+- Linux Device with Docker and docker compose installed
 
 ### Used Components
 
@@ -63,4 +63,4 @@ Thanks for your interest in contributing. Anybody is free to report bugs, unclea
 
 ## Licence & Legal Information
 
-Please read the [Legal information](LICENSE.md)
+Please read the [Legal information](LICENSE.txt)

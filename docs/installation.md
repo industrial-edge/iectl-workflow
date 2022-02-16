@@ -27,7 +27,7 @@
 
 ### Clone repository and prepare the environment
 
-1. Clone this repository to your linux device where teh IECTL is installed. 
+1. Clone this repository to your linux device where IECTL is installed. 
 2. Go to the [src](../src) folder and prepare a file structure like this (in case some folders are missing, create them): 
 
     ```txt
@@ -81,7 +81,7 @@
 
 ## Onboard Edge device(s)
 
-1. Setup your Edge device(s) in such way, that it is connected to ypour network and has access to IEM. The IED(s) should be accessible from the linux device to the point, where the configuration file is needed.
+1. Setup your Edge device(s) in such way, that it is connected to your network and has access to IEM. The IED(s) should be accessible from the linux device to the point, where the configuration file is needed.
 
   <img src="./graphics/before-onboarding.PNG"/>
 
