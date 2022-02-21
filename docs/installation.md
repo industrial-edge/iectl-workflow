@@ -12,12 +12,12 @@
 
 ## Prerequisites
 
-> **Note** Linux device is used to run shell scripts with IECTL commands
+> **Note** Linux machine is used as development environment to run shell scripts with IECTL commands
 
 ### Install Industrial Edge Control
 
 1. Go to the IE-HUB and navigate to the "Download Software" section.
-2. Click on "Developer Tools" and download Indsutrial Edge Control executable file for Linux.
+2. Click on "Developer Tools" and download Industrial Edge Control executable file for Linux.
 3. Extract the file and copy to your Linux device.
 4. Open terminal in the directory with the `iectl` executable file and run this command to make IECTL tool executable 
 
@@ -27,8 +27,8 @@
 
 ### Clone repository and prepare the environment
 
-1. Clone this repository to your linux device where IECTL is installed. 
-2. Go to the [src](../src) folder and prepare a file structure like this (in case some folders are missing, create them): 
+1. Clone this repository to your Linux development environment where IECTL is installed. 
+2. Go to the [src](../src) folder and prepare a file structure like displayed below. Folders `workspace` and `onboarding-file` are missing, please create these empty folders in your development environment. 
 
     ```txt
     src/
@@ -59,13 +59,13 @@
 
 ## Activate IEM
 
-> **Note** To finish this task, you need to have IE HUB API access granted. This means you need to have API key from IE HUB.
+> **Note** To finish this task, you need to have IE HUB API access granted. This means you need to have API key from IE HUB. Found more information how to grant API access [here](grant-api-acess.md). IP based IEM is used in this example. Steps for activating DNS based setup may differ.
 
 1. Setup the virtual machine with IEM and connect to your network. Make sure the IEM has access to internet. By end of this step the IEM should be accessible from the Linux device to the point, where the activation file is needed.
   
   <img src="./graphics/before-activation.PNG"/>
 
-2. Go to your Linux environment and open the script for activating IEM. This script can be found [here](./../src/activate_IEM/activate-iem.sh)
+2. Go to your Linux environment and open the script for activating IEM. This script can be found [here](../src/activate-iem.sh).
 
 3. Adjust the configuration parameters based on your setup.
 
@@ -77,7 +77,7 @@
   sh activate-iem.sh
   ```
 
-5. After this step, the IEM instance is created in IE HUB and the activation as well as clustyer creation is started automatically. Wait untill the cluster creation process is completed.
+5. After this step, the IEM instance is created in IE HUB and the activation as well as cluster creation is started automatically. Wait until the cluster creation process is completed. As soon as the IEM is reachable using port 9443 you can continue with the next steps.
 
 ## Onboard Edge device(s)
 
@@ -89,7 +89,7 @@
 
   <img src="./graphics/device-config.PNG"/>
 
-3. Run the following commands to create IED instance in IEM and then onboard the device. 
+3. Run the following commands to create IED instance in IEM and then onboard the device.
   
   ```bash
   sh create-ied.sh
@@ -98,7 +98,7 @@
 
 ## Deploy custom application
 
-1. Open terminal, navigate to the [app](../src/app) forder and build the docker application using this command 
+1. Open terminal, navigate to the [app](../src/app) folder and build the docker application using this command 
 
   ```bash
   docker-compose build
@@ -108,7 +108,7 @@
 
   <img src="./graphics/before-standalone-app.PNG"/>
 
-3. In order to create a standalone application, uplaod to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
+3. In order to create a standalone application, upload to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
 
   ```bash
   sh standalone-app.sh

@@ -7,15 +7,15 @@ export IEM_URL="https://<iem-ip>:9443"
 export DEVICE_NAME="<device-name>"
 
 # Application configuration variables
-export APP_NAME="<application-name>"
-export APP_REPO="<application-repository>"
+export APP_NAME="<application-name>" # Application name
+export APP_REPO="<application-repository>" # Applications repository (unique)
 
 # IECTL environmental variables
 export IE_SKIP_CERTIFICATE=true
 export EDGE_SKIP_TLS=1
 
 # Project envirinmental variables 
-export PROJECT_PATH_PREFIX="<project-path-prefix>"
+export PROJECT_PATH_PREFIX="<project-path-prefix>" # Prefix of the absolute path where the project is inside of your development environment
 
 
 echo "---------------------------Creating publisher configuration---------------------------"

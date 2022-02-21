@@ -1,11 +1,11 @@
 # Set configuration variables
-export HUB_USER="<hub-email>"
-export HUB_API_KEY="<hub-api-key>"
-export IEM_USER="<iem-email>"
-export IEM_PASSWORD="<iem-password>"
-export IEM_URL="https://<iem-ip>"
-export IEM_NAME="<iem-name>"
-export IEM_COMMON_NAME="<iem-common-name>"
+export HUB_USER="<hub-email>" # Email of the user with API access granted
+export HUB_API_KEY="<hub-api-key>" # HUB API key
+export IEM_USER="<iem-email>" # Email adress of the IEM user
+export IEM_PASSWORD="<iem-password>" # Password of the IEM user
+export IEM_URL="https://<iem-ip>" # IP adress of the IEM before activating (Use without port 9443)
+export IEM_NAME="<iem-name>" # Name of your IEM instance
+export IEM_COMMON_NAME="<iem-common-name>" # IEM common name
 
 # Set environmental variables 
 export EDGE_SKIP_TLS=1
