@@ -10,6 +10,7 @@ Industrial Edge Control (IECTL) is a command line tool that enables you to inter
     - [Prerequisites](#prerequisites)
     - [Used Components](#used-components)
   - [Installation](#installation)
+  - [Implementation](#implementation)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
   - [Licence & Legal Information](#licence--legal-information)
@@ -49,7 +50,11 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 
 ## Installation
 
-The installation steps can be found [here](docs/installation.md)
+The installation steps can be found [here](docs/installation.md).
+
+## Implementation
+
+The description of the implemented commands in the scripts can be found [here](./docs/Implementation.md).
 
 ## Documentation
 
