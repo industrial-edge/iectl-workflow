@@ -51,6 +51,10 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 ## Installation
 
 The installation steps can be found [here](docs/installation.md).
+The installation consist of following steps: 
+* [Activating IEM](docs/installation.md#activate-iem)
+* [Onboarding IED](docs/installation.md#onboard-edge-devices)
+* [Deploying self developed app](docs/installation.md#deploy-custom-application)
 
 ## Implementation
 
