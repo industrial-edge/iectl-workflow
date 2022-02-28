@@ -1,6 +1,6 @@
 # Industrial Edge Control
 
-Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from provisioning IEM, onboarding Edeg Devices to automaticaly deploying Edge applications.
+Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from provisioning IEM, onboarding Edge Devices to automatically deploying Edge applications. More information about the tool as well as the official documentation can be found [here](https://industrial-edge.io/developer/platform/references/iectl/index.html).
 
 - [Industrial Edge Control](#industrial-edge-control)
   - [Description](#description)
@@ -10,6 +10,7 @@ Industrial Edge Control (IECTL) is a command line tool that enables you to inter
     - [Prerequisites](#prerequisites)
     - [Used Components](#used-components)
   - [Installation](#installation)
+  - [Implementation](#implementation)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
   - [Licence & Legal Information](#licence--legal-information)
@@ -25,7 +26,7 @@ This application example shows how to install and use IECTL in a complete workfl
   3. Deploy Edge applications
 
 ### General task
-The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is  to provide with several shell scripts which can be executed from a device which has connection to the Industrial Edge componments you want to interact with. This application example follows the network structure dispayed in the picture below. The workflow starts with activating IEM in IE HUB, continues with automatic onboarding of one Edge Device and finally custom application is uploaded and deployed to the onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications.
+The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is to provide with several shell scripts which can be adjusted and executed from a development environment to provision Industrial Edge components. This application example follows the network structure displayed in the picture below. The workflow starts with activating IEM in IE HUB, continues with automatic onboarding of one Edge Device and finally custom application is uploaded and deployed to the newly onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications. Please note that IP based IEM is used in this example and for DNS based setup the steps may differ.
 
 <img src="./docs/graphics/network-setup.PNG"/>
 
@@ -34,21 +35,30 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 ### Prerequisites
 
 - All Components are connected to a network with DHCP server available
-- All componets have a IP adress
+- All components have an IP address
 - IEM has connection to IE HUB
+- IP based IEM is used in this example
 - Linux Device with Docker and docker compose installed
 
 ### Used Components
 
 - Industrial Edge HUB
-- Industrial Edge Managment App v1.4.11
-- Industrial Edge Managment OS v1.4.0-42-amd64
+- Industrial Edge Management App v1.4.11
+- Industrial Edge Management OS v1.4.0-42-amd64
 - Industrial Edge Device v1.3.0-57
-- Ubuntu 20.04
+- Ubuntu 20.04 as development environment
 
 ## Installation
 
-The installation steps can be found [here](docs/installation.md)
+The installation steps can be found [here](docs/installation.md).
+The installation consist of following steps: 
+* [Activating IEM](docs/installation.md#activate-iem)
+* [Onboarding IED](docs/installation.md#onboard-edge-devices)
+* [Deploying self developed app](docs/installation.md#deploy-custom-application)
+
+## Implementation
+
+The description of the implemented commands in the scripts can be found [here](./docs/Implementation.md).
 
 ## Documentation
 
@@ -59,7 +69,7 @@ The installation steps can be found [here](docs/installation.md)
   
 ## Contribution
 
-Thanks for your interest in contributing. Anybody is free to report bugs, unclear documenation, and other problems regarding this repository in the Issues section or, even better, is free to propose any changes to this repository using Merge Requests.
+Thanks for your interest in contributing. Anybody is free to report bugs, unclear documentation, and other problems regarding this repository in the Issues section or, even better, is free to propose any changes to this repository using Merge Requests.
 
 ## Licence & Legal Information
 
