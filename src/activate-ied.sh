@@ -15,12 +15,12 @@ cd workspace
 iectl publisher workspace init
 
 # Creating Edge Device configuration 
-iectl config add device \
+iectl config add ied \
         --name "device-config-dev" \
         --url $DEVICE_URL \
         --user $DEVICE_USER \
         --password $DEVICE_PASSWORD  
 
 # Activating device in IEM
-iectl ied device activate \
+iectl ied system activate \
             --files "$PROJECT_PATH_PREFIX/onboarding-file/device.txt" 

@@ -18,7 +18,7 @@ iectl config add iehub \
          --password $HUB_API_KEY
 
 # Activate IEM in HUB 
-iectl onboard onboard-iem \
+iectl iem system onboard \
            --username $IEM_USER \
            --password $IEM_PASSWORD \
            --iem-url $IEM_URL \
