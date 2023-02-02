@@ -29,7 +29,7 @@ cd workspace
 iectl publisher workspace init
 
 echo "---------------------------Creating application---------------------------"
-iectl publisher standaloneapp create \
+iectl publisher standalone-app create \
             --reponame $APP_REPO \
             --appdescription "application description"  \
             --iconpath "$PROJECT_PATH_PREFIX/appicon/icon.png" \
@@ -37,13 +37,13 @@ iectl publisher standaloneapp create \
 
 echo "---------------------------Creating application version---------------------------"
 # Version managment 
-version=$(iectl publisher sa lv -a $APP_NAME -k "versionNumber" | \
+version=$(iectl publisher standalone-app version list -a $APP_NAME -k "versionNumber" | \
         python3 $PROJECT_PATH_PREFIX/script/getAppVersion.py)
 
 version_new=$(echo $version | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
 echo 'new Version: '$version_new
 
-iectl publisher standaloneapp createversion \
+iectl publisher standalone-app version create \
             --appname $APP_NAME \
             --changelogs "initial release" \
             --yamlpath "$PROJECT_PATH_PREFIX/app/docker-compose.prod.yml" \
@@ -61,27 +61,27 @@ iectl config add iem  \
          --user $IEM_USER \
          --password $IEM_PASSWORD  
 
-iectl publisher edgemanagement login -u $IEM_URL -e $IEM_USER -p $IEM_PASSWORD
+#iectl publisher edgemanagement login -u $IEM_URL -e $IEM_USER -p $IEM_PASSWORD
 
 echo "---------------------------Uploading app to IEM---------------------------"
-iectl publisher edgemanagement application uploadtocatalog \
+iectl publisher app-project upload catalog \
         --appname $APP_NAME \
-        -w $version_new
+        -v $version_new
 
 
 echo "---------------------------Deploying app to IED---------------------------"
 # Get application ID
-appID=$(iectl portal applications list-catalog | \
+appID=$(iectl iem catalog list| \
         python3 $PROJECT_PATH_PREFIX/script/getAppId.py --app_name $APP_NAME)  
 echo $appID
 
 # Get edge device ID
-deviceID=$(iectl portal devices list-devices | \
+deviceID=$(iectl iem device list| \
         python3 $PROJECT_PATH_PREFIX/script/getDeviceId.py --device_name $DEVICE_NAME)  
 echo $deviceID
 
 # SUbmit a batch job to install app to IED
-iectl portal batches submit-batch \
+iectl iem job batch-create \
         --appid "$appID" \
         --operation "installApplication" \
         --infoMap  {"devices":["$deviceID"]}

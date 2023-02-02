@@ -47,7 +47,7 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 - Industrial Edge Management OS v1.4.0-42-amd64
 - Industrial Edge Device v1.3.0-57
 - Ubuntu 20.04 as development environment
-- Industrial Edge Control (IECTL) for Linux v1.1.6
+- Industrial Edge Control (IECTL) for Linux v2.0.3
 
 ## Installation
 

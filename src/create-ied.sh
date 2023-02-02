@@ -17,6 +17,7 @@ export EDGE_SKIP_TLS=1
 # Project environmental variables 
 export PROJECT_PATH_PREFIX="<project-path-prefix>" # Prefix of the absolute path where the project is inside of your development environment
 
+
 cd workspace
 iectl publisher workspace init
 
@@ -30,5 +31,5 @@ iectl config add iem  \
 rm -rfv $PROJECT_PATH_PREFIX/onboarding-file/*
 
 # Creating edge device in IEM
-iectl portal devices create-device --body '{"device":{"onboarding":{"localUserName":"'$DEVICE_USER'","localPassword":"'$DEVICE_PASSWORD'","deviceName":"'$DEVICE_NAME'","deviceTypeId":"core.ieipc"},"Device":{"Network":{"Interfaces":[{"MacAddress":"'$DEVICE_MAC'","GatewayInterface":true,"DHCP":"enabled","Static":{"IPv4":"","NetMask":"","Gateway":""}}]}},"ntpServers":[{"ntpServer":"0.pool.ntp.org","preferred":true}]}}' \
+iectl iem device create --body '{"device":{"onboarding":{"localUserName":"'$DEVICE_USER'","localPassword":"'$DEVICE_PASSWORD'","deviceName":"'$DEVICE_NAME'","deviceTypeId":"core.ieipc"},"Device":{"Network":{"Interfaces":[{"MacAddress":"'$DEVICE_MAC'","GatewayInterface":true,"DHCP":"enabled","Static":{"IPv4":"","NetMask":"","Gateway":""}}]}},"ntpServers":[{"ntpServer":"0.pool.ntp.org","preferred":true}]}}' \
         > $PROJECT_PATH_PREFIX/onboarding-file/device.txt
