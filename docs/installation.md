@@ -4,10 +4,13 @@
 - [Provisioning of Industrial Edge components using IECTL](#provisioning-of-industrial-edge-components-using-iectl)
   - [Prerequisites](#prerequisites)
     - [Install Industrial Edge Control](#install-industrial-edge-control)
-    - [Clone repository and prepare the environment](#clone-repository-and-prepare-the-environment)
+    - [Download Repository](#download-repository)
+    - [Prepare the environment](#prepare-the-environment)
   - [Activate IEM](#activate-iem)
   - [Onboard Edge device(s)](#onboard-edge-devices)
   - [Deploy custom application](#deploy-custom-application)
+    - [Build docker image](#build-docker-image)
+    - [Deploy application](#deploy-application)
 
 
 ## Prerequisites
@@ -25,10 +28,25 @@
     sudo install ./iectl /usr/bin/
     ```
 
-### Clone repository and prepare the environment
+### Download Repository
 
-1. Clone this repository to your Linux development environment where IECTL is installed. 
-2. Go to the [src](../src) folder and prepare a file structure like displayed below. Folders `workspace` and `onboarding-file` are missing, please create these empty folders in your development environment. 
+Download or clone the repository source code to your workstation.  
+![Github Clone Section](graphics/clonerepo.png)
+
+
+* Trough terminal:
+```bash
+git clone https://github.com/industrial-edge/iectl-workflow.git
+```
+
+* Trough VSCode:  
+<kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`:
+
+![VS Code Git Clone command](graphics/git.png)
+
+### Prepare the environment
+ 
+1. Go to the [src](../src) folder and prepare a file structure like displayed below. Folders `workspace` and `onboarding-file` are missing, please create these empty folders in your development environment. 
 
     ```txt
     src/
@@ -98,13 +116,17 @@
 
 ## Deploy custom application
 
-1. Open terminal, navigate to the [app](../src/app) folder and build the docker application using this command 
+### Build docker image
 
-  ```bash
-  docker-compose build
-  ```
+- Navigate into `src/app/web` and find the file named `Dockerfile.example`. The `Dockerfile.example` is an example Dockerfile that can be used to build the docker image(s) of the service(s) that runs in this application example. If you choose to use these, rename them to `Dockerfile` before proceeding
+- Open a console in the `src/app` folder (where the `docker-compose` file is)
+- Use the `docker compose build` (replaces the older `docker-compose build`) command to build the docker image of the service which is specified in the docker-compose.yml file.
+- These Docker images can now be used to build your app with the Industrial Edge App Publisher
+- `docker images` can be used to check for the images
 
-2. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
+### Deploy application
+
+1. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
 
   <img src="./graphics/before-standalone-app.PNG"/>
 
