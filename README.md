@@ -1,6 +1,6 @@
 # Industrial Edge Control
 
-Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from provisioning IEM, onboarding Edge Devices to automatically deploying Edge applications. More information about the tool as well as the official documentation can be found [here](https://industrial-edge.io/developer/platform/references/iectl/index.html).
+Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from provisioning IEM, onboarding Edge Devices to automatically deploying Edge applications. More information about the tool as well as the official documentation can be found [here](https://docs.eu1.edge.siemens.cloud/apis_and_references/iectl/index.html).
 
 - [Industrial Edge Control](#industrial-edge-control)
   - [Description](#description)
