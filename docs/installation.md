@@ -6,7 +6,6 @@
     - [Install Industrial Edge Control](#install-industrial-edge-control)
     - [Download Repository](#download-repository)
     - [Prepare the environment](#prepare-the-environment)
-  - [Activate IEM](#activate-iem)
   - [Onboard Edge device(s)](#onboard-edge-devices)
   - [Deploy custom application](#deploy-custom-application)
     - [Build docker image](#build-docker-image)
@@ -75,28 +74,6 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
     │   │   getDeviceId.py
     ```
 
-## Activate IEM
-
-> **Note** To finish this task, you need to have IE HUB API access granted. This means you need to have API key from IE HUB. Found more information how to grant API access [here](grant-api-acess.md). IP based IEM is used in this example. Steps for activating DNS based setup may differ.
-
-1. Setup the virtual machine with IEM and connect to your network. Make sure the IEM has access to internet. By end of this step the IEM should be accessible from the Linux device to the point, where the activation file is needed.
-  
-  <img src="./graphics/before-activation.PNG"/>
-
-2. Go to your Linux environment and open the script for activating IEM. This script can be found [here](../src/activate-iem.sh).
-
-3. Adjust the configuration parameters based on your setup.
-
-  <img src="./graphics/activate-iem-config.PNG"/>
-
-4. Open up terminal and run this command to start the activation script.
-
-  ```bash
-  sh activate-iem.sh
-  ```
-
-5. After this step, the IEM instance is created in IE HUB and the activation as well as cluster creation is started automatically. Wait until the cluster creation process is completed. As soon as the IEM is reachable using port 9443 you can continue with the next steps.
-
 ## Onboard Edge device(s)
 
 1. Setup your Edge device(s) in such way, that it is connected to your network and has access to IEM. The IED(s) should be accessible from the linux device to the point, where the configuration file is needed.
@@ -105,7 +82,8 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
 2. Open the [create-ied.sh](../src/create-ied.sh) and [activate-ied.sh](../src/activate-ied.sh) scripts and adjust the configuration and environmental variables in the beginning of the script.
 
-  <img src="./graphics/device-config.PNG"/>
+  <img src="./graphics/createIED.png"/>
+  <img src="./graphics/activateIED.png"/>
 
 3. Run the following commands to create IED instance in IEM and then onboard the device.
   
@@ -128,7 +106,7 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
 1. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
 
-  <img src="./graphics/before-standalone-app.PNG"/>
+  <img src="./graphics/appdev.png"/>
 
 3. In order to create a standalone application, upload to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
 

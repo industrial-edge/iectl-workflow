@@ -1,6 +1,6 @@
 # Industrial Edge Control
 
-Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from provisioning IEM, onboarding Edge Devices to automatically deploying Edge applications. More information about the tool as well as the official documentation can be found [here](https://docs.eu1.edge.siemens.cloud/apis_and_references/iectl/index.html).
+Industrial Edge Control (IECTL) is a command line tool that enables you to interact with APIs of Industrial Edge components using just commands. This document describes how to use IECTL to automate workflow from onboarding Edge Devices to automatically deploying Edge applications. More information about the tool as well as the official documentation can be found [here](https://docs.eu1.edge.siemens.cloud/apis_and_references/iectl/index.html).
 
 - [Industrial Edge Control](#industrial-edge-control)
   - [Description](#description)
@@ -20,14 +20,13 @@ Industrial Edge Control (IECTL) is a command line tool that enables you to inter
 
 ### Overview
 
-This application example shows how to install and use IECTL in a complete workflow to automatically setup Edge components in 3 steps:
+This application example shows how to install and use IECTL in a complete workflow to automatically setup Edge components in 2 steps:
 
-  1. Activate IEM
-  2. Onboard Edge device
-  3. Deploy Edge applications
+  1. Onboard Edge device
+  2. Deploy Edge applications
 
 ### General task
-The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is to provide with several shell scripts which can be adjusted and executed from a development environment to provision Industrial Edge components. This application example follows the network structure displayed in the picture below. The workflow starts with activating IEM in IE HUB, continues with automatic onboarding of one Edge Device and finally custom application is uploaded and deployed to the newly onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications. Please note that IP based IEM is used in this example and for DNS based setup the steps may differ.
+The main goal of this example is to show how to setup the Industrial Edge platform in an automated workflow using IECTL. The idea is to provide with several shell scripts which can be adjusted and executed from a development environment to provision Industrial Edge components. This application example follows the network structure displayed in the picture below. The workflow starts with automatic onboarding of one Edge Device and finally custom application is uploaded and deployed to the newly onboarded device. The provided shell scripts can be used and scaled for multiple IEMs, IEDs or applications. Please note that IP based IEM is used in this example and for DNS based setup the steps may differ.
 
 <img src="./docs/graphics/network-setup.PNG"/>
 
@@ -43,18 +42,15 @@ The main goal of this example is to show how to setup the Industrial Edge platfo
 
 ### Used Components
 
-- Industrial Edge HUB
-- Industrial Edge Management App v1.4.11
-- Industrial Edge Management OS v1.4.0-42-amd64
-- Industrial Edge Device v1.3.0-57
+- Industrial Edge Management Virtual (IEM App v1.15.15)
+- Industrial Edge Virtual Device v1.26.2-1-b
 - Ubuntu 20.04 as development environment
-- Industrial Edge Control (IECTL) for Linux v2.0.3
+- Industrial Edge Control (IECTL) for Linux v2.16.12
 
 ## Installation
 
 The installation steps can be found [here](docs/installation.md).
 The installation consist of following steps: 
-* [Activating IEM](docs/installation.md#activate-iem)
 * [Onboarding IED](docs/installation.md#onboard-edge-devices)
 * [Deploying self developed app](docs/installation.md#deploy-custom-application)
 
