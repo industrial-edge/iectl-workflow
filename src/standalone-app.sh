@@ -26,16 +26,16 @@ set -e  # Stop the script if any command fails
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ─── IEM Configuration Variables ─────────────────────────────────────────────
-export IEM_USER="edge@siemens.com"          # IEM username
-export IEM_PASSWORD="Edge4SUP!123"      # IEM password
-export IEM_URL="https://10.31.1.240"    # IEM URL
+export IEM_USER="<iem-username>"          # IEM username
+export IEM_PASSWORD="<iem-password>"      # IEM password
+export IEM_URL="<iem-url>"    # IEM URL
 
 # ─── Device Configuration Variables ──────────────────────────────────────────
-export DEVICE_NAME="ievdTest"        # Target Edge device name
+export DEVICE_NAME="<ied-name>"        # Target Edge device name
 
 # ─── Application Configuration Variables ─────────────────────────────────────
-export APP_NAME="hello-word"      # Application name
-export APP_REPO="hello-word_repo"      # Application repository (must be unique)
+export APP_NAME="<application-name>"      # Application name
+export APP_REPO="<application-repo>"      # Application repository (must be unique)
 
 # ─── IECTL Environment Variables ─────────────────────────────────────────────
 export IE_SKIP_CERTIFICATE=true           # Skip certificate check (trusted environments only!)
