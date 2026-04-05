@@ -21,7 +21,7 @@ To onboard IED(s) to IEM, you have to run 2 scripts in the right order.
   ```
 This command adds a new IEM configuration for connection to your instance. Options: 
   * name: Configuration name
-  * url: IEM URL to connect with. For IP based setup it requires port 9443
+  * url: IEM URL to connect with.
   * user: IEM users email address 
   * password: IEM users password
 
