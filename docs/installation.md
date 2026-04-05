@@ -82,7 +82,8 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
 2. Open the [create-ied.sh](../src/create-ied.sh) and [activate-ied.sh](../src/activate-ied.sh) scripts and adjust the configuration and environmental variables in the beginning of the script.
 
-  <img src="./graphics/device-config.PNG"/>
+  <img src="./graphics/createIED.png"/>
+  <img src="./graphics/activateIED.png"/>
 
 3. Run the following commands to create IED instance in IEM and then onboard the device.
   
@@ -105,7 +106,7 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
 1. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
 
-  <img src="./graphics/before-standalone-app.PNG"/>
+  <img src="./graphics/appdev.png"/>
 
 3. In order to create a standalone application, upload to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
 
