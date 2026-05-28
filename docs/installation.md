@@ -1,6 +1,5 @@
 # Provisioning of Industrial Edge components using IECTL
 
-
 - [Provisioning of Industrial Edge components using IECTL](#provisioning-of-industrial-edge-components-using-iectl)
   - [Prerequisites](#prerequisites)
     - [Install Industrial Edge Control](#install-industrial-edge-control)
@@ -11,7 +10,6 @@
     - [Build docker image](#build-docker-image)
     - [Deploy application](#deploy-application)
 
-
 ## Prerequisites
 
 > **Note** Linux machine is used as development environment to run shell scripts with IECTL commands
@@ -21,7 +19,7 @@
 1. Go to the IE-HUB and navigate to the "Download Software" section.
 2. Click on "Developer Tools" and download Industrial Edge Control executable file for Linux.
 3. Extract the file and copy to your Linux device.
-4. Open terminal in the directory with the `iectl` executable file and run this command to make IECTL tool executable 
+4. Open terminal in the directory with the `iectl` executable file and run this command to make IECTL tool executable
 
     ```bash
     sudo install ./iectl /usr/bin/
@@ -32,27 +30,34 @@
 Download or clone the repository source code to your workstation.  
 ![Github Clone Section](graphics/clonerepo.png)
 
+- Trough terminal:
 
-* Trough terminal:
 ```bash
 git clone https://github.com/industrial-edge/iectl-workflow.git
 ```
 
-* Trough VSCode:  
+- Trough VSCode:  
 <kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`:
 
 ![VS Code Git Clone command](graphics/git.png)
 
 ### Prepare the environment
- 
-1. Go to the [src](../src) folder and prepare a file structure like displayed below. Folders `workspace` and `onboarding-file` are missing, please create these empty folders in your development environment. 
+
+1. Go to the [src](../src) folder and prepare a file structure like displayed below. Folders `workspace` and `onboarding-file` are missing, please create these empty folders in your development environment.
+
+2. Copy `.env.example` to `.env` and fill in your credentials and settings:
+
+    ```bash
+    cp .env.example .env
+    ```
 
     ```txt
     src/
-    │   activate-iem.sh
     │   create-ied.sh
     │   activate-ied.sh          
     │   standalone-app.sh
+    │   .env.example
+    │   .env
     │
     └───workspace/
     │
@@ -80,16 +85,27 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
   <img src="./graphics/before-onboarding.PNG"/>
 
-2. Open the [create-ied.sh](../src/create-ied.sh) and [activate-ied.sh](../src/activate-ied.sh) scripts and adjust the configuration and environmental variables in the beginning of the script.
+1. Check the settings in `.env` and adapt to it to match your IEM and device credentials:
 
-  <img src="./graphics/createIED.png"/>
-  <img src="./graphics/activateIED.png"/>
+    <img src="./graphics/configuration.png"/>
 
-3. Run the following commands to create IED instance in IEM and then onboard the device.
+2. Run the following commands to create IED instance in IEM and then onboard the device.
   
   ```bash
   sh create-ied.sh
   sh activate-ied.sh
+  ```
+
+## Deploy application
+
+1. Ensure the `.env` file is configured with the application ID and IEM settings (see [Prepare the environment](#prepare-the-environment)).
+
+  <img src="./graphics/configuration.png"/>
+
+1. In order to deploy a Application on an Edge device, run the following command to execute the script:
+
+  ```bash
+  sh deploy-app.sh
   ```
 
 ## Deploy custom application
@@ -104,14 +120,14 @@ git clone https://github.com/industrial-edge/iectl-workflow.git
 
 ### Deploy application
 
-1. Open [standalone-app.sh](../src/standalone-app.sh) script and adjust the configuration and environmental variables in the beginning of the script. 
+1. Ensure the `.env` file is configured with your application and IEM settings (see [Prepare the environment](#prepare-the-environment)).
 
-  <img src="./graphics/appdev.png"/>
+  <img src="./graphics/configuration.png"/>
 
-3. In order to create a standalone application, upload to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
+1. In order to create a standalone application, upload to IEM and deploy to the newly onboarded Edge device, run the following command to execute the script:
 
   ```bash
   sh standalone-app.sh
   ```
 
-4. By the end of this step, the application should get deployed to the edge device.
+1. By the end of this step, the application should get deployed to the edge device.

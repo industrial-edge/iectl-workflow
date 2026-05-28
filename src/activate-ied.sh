@@ -14,17 +14,21 @@ set -e  # Stop the script if any command fails
 # Usage: sh activate-ied.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
-# ─── Device Configuration Variables ─────────────────────────────────────────
-export DEVICE_USER="<ied-username>"       # Username of the Edge device
-export DEVICE_PASSWORD="<ied-password>"   # Password of the Edge device
-export DEVICE_URL="<ied-url>"             # Edge device URL, https://[ip] (before onboarding)
+# ─── Load Configuration ─────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENV_FILE="$SCRIPT_DIR/.env"
+if [ ! -f "$ENV_FILE" ]; then
+  echo "❌ ERROR: Configuration file not found: $ENV_FILE"
+  echo "   Copy .env.example to .env and fill in your values."
+  exit 1
+fi
+set -a
+# shellcheck source=.env
+. "$ENV_FILE"
+set +a
 
-# ─── IECTL Environment Variables ─────────────────────────────────────────────
-export IE_SKIP_CERTIFICATE=true           # Skip certificate check (trusted environments only!)
-export EDGE_SKIP_TLS=1                    # Disable TLS verification
-
-# ─── Project Environment Variables ───────────────────────────────────────────
-export ONBOARDING_FILE="./onboarding-file/device.txt"
+# ─── Project Variables ───────────────────────────────────────────────────────
+ONBOARDING_FILE="$SCRIPT_DIR/onboarding-file/device.txt"
 
 # ─── Validate Onboarding File Exists ─────────────────────────────────────────
 if [ ! -f "$ONBOARDING_FILE" ]; then

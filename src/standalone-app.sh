@@ -25,21 +25,18 @@ set -e  # Stop the script if any command fails
 # Usage: sh standalone-app.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
-# ─── IEM Configuration Variables ─────────────────────────────────────────────
-export IEM_USER="<iem-username>"          # IEM username
-export IEM_PASSWORD="<iem-password>"      # IEM password
-export IEM_URL="<iem-url>"    # IEM URL
-
-# ─── Device Configuration Variables ──────────────────────────────────────────
-export DEVICE_NAME="<ied-name>"        # Target Edge device name
-
-# ─── Application Configuration Variables ─────────────────────────────────────
-export APP_NAME="<application-name>"      # Application name
-export APP_REPO="<application-repo>"      # Application repository (must be unique)
-
-# ─── IECTL Environment Variables ─────────────────────────────────────────────
-export IE_SKIP_CERTIFICATE=true           # Skip certificate check (trusted environments only!)
-export EDGE_SKIP_TLS=1                    # Disable TLS verification
+# ─── Load Configuration ─────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENV_FILE="$SCRIPT_DIR/.env"
+if [ ! -f "$ENV_FILE" ]; then
+  echo "❌ ERROR: Configuration file not found: $ENV_FILE"
+  echo "   Copy .env.example to .env and fill in your values."
+  exit 1
+fi
+set -a
+# shellcheck source=.env
+. "$ENV_FILE"
+set +a
 
 # ═════════════════════════════════════════════════════════════════════════════
 # PHASE 1 — Environment Setup
