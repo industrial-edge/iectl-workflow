@@ -22,24 +22,22 @@ set -e  # Stop the script if any command fails
 # Usage: sh create-ied.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
-# ─── IEM Configuration Variables ───────────────────────────────────────────
-export IEM_USER="<iem-username>"        # Email address of the IEM user
-export IEM_PASSWORD="<iem-password>"    # Password of the IEM user
-export IEM_URL="<iem-url>"              # IEM URL
-
-# ─── Device Configuration Variables ────────────────────────────────────────
-export DEVICE_NAME="<ied-name>"         # Name of your Edge device
-export DEVICE_USER="<ied-email>"        # Email address of the device user
-export DEVICE_PASSWORD="<ied-pasword>"  # Password of the device user
-export DEVICE_MAC="<ied-mac-adress>"    # Edge devie MAC address
-
-# ─── IECTL Environment Variables ───────────────────────────────────────────
-export IE_SKIP_CERTIFICATE=true
-export EDGE_SKIP_TLS=1
+# ─── Load Configuration ─────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENV_FILE="$SCRIPT_DIR/.env"
+if [ ! -f "$ENV_FILE" ]; then
+  echo "❌ ERROR: Configuration file not found: $ENV_FILE"
+  echo "   Copy .env.example to .env and fill in your values."
+  exit 1
+fi
+set -a
+# shellcheck source=.env
+. "$ENV_FILE"
+set +a
 
 # ─── Project Variables ──────────────────────────────────────────────────────
-export ONBOARDING_DIR="./onboarding-file"
-export ONBOARDING_FILE="$ONBOARDING_DIR/device.txt"
+ONBOARDING_DIR="./onboarding-file"
+ONBOARDING_FILE="$ONBOARDING_DIR/device.txt"
 
 # ─── Prepare Output Directory ──────────────────────────────────────────────
 mkdir -p "$ONBOARDING_DIR"
@@ -53,6 +51,28 @@ iectl config add iem \
     --password "$IEM_PASSWORD"
 
 # ─── Build Device JSON Body ─────────────────────────────────────────────────
+
+# ─── Build Optional DNS JSON Block ──────────────────────────────────────────
+DNS_CONFIG_JSON=""
+if [ -n "$DEVICE_DNS_PRIMARY" ] || [ -n "$DEVICE_DNS_SECONDARY" ]; then
+  DNS_CONFIG_JSON=', "DNSConfig": {'
+  first_dns_field=true
+
+  if [ -n "$DEVICE_DNS_PRIMARY" ]; then
+    DNS_CONFIG_JSON="$DNS_CONFIG_JSON\"PrimaryDNS\": \"$DEVICE_DNS_PRIMARY\""
+    first_dns_field=false
+  fi
+
+  if [ -n "$DEVICE_DNS_SECONDARY" ]; then
+    if [ "$first_dns_field" = false ]; then
+      DNS_CONFIG_JSON="$DNS_CONFIG_JSON, "
+    fi
+    DNS_CONFIG_JSON="$DNS_CONFIG_JSON\"SecondaryDNS\": \"$DEVICE_DNS_SECONDARY\""
+  fi
+
+  DNS_CONFIG_JSON="$DNS_CONFIG_JSON}"
+fi
+
 DEVICE_BODY=$(cat <<EOF
 {
   "device": {
@@ -60,7 +80,7 @@ DEVICE_BODY=$(cat <<EOF
       "localUserName": "$DEVICE_USER",
       "localPassword": "$DEVICE_PASSWORD",
       "deviceName": "$DEVICE_NAME",
-      "deviceTypeId": "core.ieipc"
+      "deviceTypeId": "$DEVICE_TYPE"
     },
     "Device": {
       "Network": {
@@ -74,6 +94,7 @@ DEVICE_BODY=$(cat <<EOF
               "NetMask": "",
               "Gateway": ""
             }
+            $DNS_CONFIG_JSON
           }
         ]
       }
@@ -97,6 +118,31 @@ iectl iem device create --body "$DEVICE_BODY" > "$ONBOARDING_FILE"
 if [ ! -s "$ONBOARDING_FILE" ]; then
     echo "❌ Error: The onboarding file was not generated correctly."
     exit 1
+fi
+
+# ─── Assign label to device ─────────────────────────────────────────────────
+if [ -n "$DEVICE_LABEL" ]; then
+    echo "🔄 Assigning label '$DEVICE_LABEL' to device '$DEVICE_NAME'"
+    sleep 2s
+    echo "  ↳ Retrieving device ID for: $DEVICE_NAME..."
+
+    deviceID=$(iectl iem device list | \
+      python3 ./script/getDeviceId.py --device_name "$DEVICE_NAME")
+    
+    if [ -z "$deviceID" ]; then
+      echo "❌ ERROR: Could not retrieve device ID for: $DEVICE_NAME"
+      exit 1
+    fi
+
+    iectl iem device label allocate \
+      --device-id "$deviceID" \
+      --label "$DEVICE_LABEL"
+
+    # ─── Validate Output ────────────────────────────────────────────────────────
+    if [ $? -ne 0 ]; then
+        echo "❌ Error: Failed to assign label to the device."
+        exit 1
+    fi
 fi
 
 echo "✅ Device created successfully. Onboarding file available at: $ONBOARDING_FILE"
